@@ -16,6 +16,7 @@ var appRouter = function(app) {
 	var emo_final = [];
 	var text_final = [];
 	var text_temp = {};
+	var type = "";
 
 	app.get("/test", function(req, res) {
 		console.log("audio data received");
@@ -25,6 +26,14 @@ var appRouter = function(app) {
 	app.post("/upload", upload.single('audio'),function(req, res) {
 
 		console.log("Upload API Started");
+		if(req.file.mimetype === 'audio/wave')
+		{
+			type = 'audio/wav';
+		}
+		else{
+			type = req.file.mimetype;
+		}
+		console.log(type);
 		const fileName = './' + req.file.path;
 		const file = fs.readFileSync(fileName);
 		audioBytes = file.toString('base64'); 
@@ -72,7 +81,7 @@ var appRouter = function(app) {
 		});
 		var recognizeParams = {
 		  audio: combinedStream,
-		  content_type: 'audio/wav',
+		  content_type: type,
 		  timestamps: true,
 		};
 		speechToText.recognize(recognizeParams, function(error, speechResults) {
@@ -117,6 +126,14 @@ var appRouter = function(app) {
 	});
 
 	app.post("/combined", upload.single('audio'),function(req, res) {
+		var type = "";
+		if(req.file.mimetype === 'audio/wave')
+		{
+			type = 'audio/wav';
+		}
+		else{
+			type = req.file.mimetype;
+		}
 		console.log("emotion work started");
 		const fileName = './' + req.file.path;
 		const file = fs.readFileSync(fileName);
@@ -156,7 +173,7 @@ var appRouter = function(app) {
 			combinedStream.append(fs.createReadStream(fileName));
 			var recognizeParams = {
 			  audio: combinedStream,
-			  content_type: 'audio/wav',
+			  content_type: type,
 			  timestamps: true,
 			};
 			speechToText.recognize(recognizeParams, function(error, speechResults) {
