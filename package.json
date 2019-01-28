@@ -1,0 +1,25 @@
+{
+  "name": "major",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/speech": "^2.1.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "deep-affects": "^0.1.6",
+    "express": "^4.16.4",
+    "multer": "^1.4.1",
+    "promise": "^8.0.2",
+    "request": "^2.88.0",
+    "watson-developer-cloud": "^3.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
