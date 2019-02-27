@@ -45,6 +45,7 @@ var appRouter = function(app) {
 		}
 		request.post(options, function(error, response, emotionsResults){
 			if(error){
+				console.log(48,"error");
 				res.send("error");
 			}
 			else{
@@ -72,6 +73,7 @@ var appRouter = function(app) {
 			speechToText.recognize(recognizeParams, function(error, speechResults) {
 			  if (error) {
 			    res.send("error");
+			    console.log(76,"error");
 			  }  else {
 			  		var text_final = [];
 			  		var j = 0;
@@ -96,6 +98,7 @@ var appRouter = function(app) {
 				    	})
 				    })
 				    res.json(text_final);
+				    console.log(text_final);
 				  }
 			}); 
 			}
