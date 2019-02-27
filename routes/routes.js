@@ -95,7 +95,7 @@ var appRouter = function(app) {
 				    		})
 				    	})
 				    })
-				    res.send(text_final);
+				    res.json(text_final);
 				  }
 			}); 
 			}
