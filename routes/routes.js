@@ -6,7 +6,7 @@ var upload = multer({dest:'uploads/'});
 const fs = require('fs');
 var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1');
 var ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
-
+const pdf = require('pdf-parse');
 var CombinedStream = require('combined-stream');
 
 var appRouter = function(app) {
@@ -26,6 +26,16 @@ var appRouter = function(app) {
 		res.send("Working");
 	});
 	
+	app.post("/document", upload.single('pdf'),function(req, res) {
+		const fileName = './' + req.file.path;
+    	let dataBuffer = fs.readFileSync(fileName);		
+    	pdf(dataBuffer).then(function(data) {
+      	//console.log(data.text);
+      	res.send(data.text);
+    });
+
+	});
+
 	app.post("/combined", upload.single('audio'),function(req, res) {
 		var type = "";
 		if(req.file.mimetype === 'audio/wave'){
