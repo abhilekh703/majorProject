@@ -18,6 +18,10 @@ var appRouter = function(app) {
 	var text_temp = {};
 	var type = "";
 
+	app.get("/", function(req, res) {
+		res.send("Welcome to Aawaz server");
+	});
+
 	app.get("/testing", function(req, res) {
 		res.send("Working");
 	});
@@ -27,7 +31,7 @@ var appRouter = function(app) {
 		if(req.file.mimetype === 'audio/wave'){
 			type = 'audio/wav';
 		}
-		else{
+		else {
 			type = req.file.mimetype;
 		}
 		const fileName = './' + req.file.path;
@@ -98,7 +102,7 @@ var appRouter = function(app) {
 				    	})
 				    })
 				    res.json(text_final);
-				    console.log(text_final);
+				    console.log(typeof(text_final));
 				  }
 			}); 
 			}
