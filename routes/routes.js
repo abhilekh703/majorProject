@@ -30,7 +30,7 @@ var appRouter = function(app) {
 		const fileName = './' + req.file.path;
     	let dataBuffer = fs.readFileSync(fileName);		
     	pdf(dataBuffer).then(function(data) {
-      	console.log(data.text);
+      	console.log("Sagar API worked");
       	res.send(data.text);
     });
 
@@ -112,7 +112,7 @@ var appRouter = function(app) {
 				    	})
 				    })
 				    res.json(text_final);
-				    console.log(text_final);
+				    console.log("Lekh API worked");
 				  }
 			}); 
 			}
